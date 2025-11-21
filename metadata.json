@@ -1,0 +1,5 @@
+{
+  "name": "DevPronounce - エンジニア用語読み方投票",
+  "description": "Webエンジニア界隈で人によって読み方が異なる用語（async, kubernetesなど）について、自分の発音を投票し、みんなの読み方の分布を可視化するアプリです。",
+  "requestFramePermissions": []
+}
