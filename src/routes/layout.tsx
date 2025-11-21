@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import '../styles.css';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   // Waku injects this into the body of index.html.

@@ -1,0 +1,13 @@
+name = "dev-pronounce"
+compatibility_date = "2024-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dev-pronounce-db"
+database_id = "YOUR_DATABASE_ID_HERE"
+migrations_dir = "drizzle"
+
+

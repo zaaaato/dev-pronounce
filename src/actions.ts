@@ -1,19 +1,16 @@
 'use server';
 
-import { getTerms, saveTerms, updateVote } from './db/storage';
-import { fetchControversialTerms } from './services/geminiService';
+import { getTerms, updateVote } from './db/storage';
 import { TermData } from './types';
 
 export async function loadTermsAction(): Promise<TermData[]> {
   try {
     // まずDBからデータを取得
-    let terms = await getTerms();
+    const terms = await getTerms();
 
-    // データが空（初回起動）の場合はGemini APIから生成
-    if (!terms || terms.length === 0) {
-      console.log('Database is empty. Generating terms via Gemini...');
-      terms = await fetchControversialTerms();
-      await saveTerms(terms);
+    // データが空の場合は空配列を返す
+    if (!terms) {
+      return [];
     }
 
     return terms;
