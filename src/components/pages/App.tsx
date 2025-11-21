@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { TermData, AppState } from './types';
-import { loadTermsAction, voteAction } from './actions';
-import Header from './components/Header';
-import VotingCard from './components/VotingCard';
+import { TermData, AppState } from '../../types';
+import { loadTermsAction, voteAction } from '../../actions';
+import Header from '../generic/Header';
+import VotingCard from '../generic/VotingCard';
 import { Loader2, AlertTriangle, RefreshCcw } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -60,7 +60,7 @@ const App: React.FC = () => {
       <Header />
 
       <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-6 relative overflow-hidden z-0">
-        
+
         {/* Background decorative elements - POP style */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob -z-10"></div>
         <div className="absolute top-20 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 -z-10"></div>
@@ -83,8 +83,8 @@ const App: React.FC = () => {
                 <AlertTriangle className="w-10 h-10 text-red-500" />
               </div>
               <h2 className="text-2xl font-bold text-slate-800 mb-2">おっと、エラーです！</h2>
-              <p className="text-slate-500 mb-6">データの取得に失敗しちゃいました。<br/>サーバーの状態を確認してください。</p>
-              <button 
+              <p className="text-slate-500 mb-6">データの取得に失敗しちゃいました。<br />サーバーの状態を確認してください。</p>
+              <button
                 onClick={loadTerms}
                 className="flex items-center gap-2 mx-auto bg-slate-800 hover:bg-slate-700 text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-lg"
               >
@@ -100,7 +100,7 @@ const App: React.FC = () => {
               <div className="flex justify-center mb-8 items-center gap-3">
                 <span className="font-bold text-slate-400 text-sm">START</span>
                 <div className="w-48 h-3 bg-slate-200 rounded-full overflow-hidden border border-slate-300/50">
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-orange-400 to-pink-500 transition-all duration-500 ease-out rounded-full"
                     style={{ width: `${((currentTermIndex + 1) / terms.length) * 100}%` }}
                   />
@@ -108,7 +108,7 @@ const App: React.FC = () => {
                 <span className="font-bold text-orange-500 text-lg">{currentTermIndex + 1} <span className="text-slate-400 text-sm">/ {terms.length}</span></span>
               </div>
 
-              <VotingCard 
+              <VotingCard
                 key={terms[currentTermIndex].id} // Force remount on term change to reset voted state
                 term={terms[currentTermIndex]}
                 onVote={handleVote}
@@ -123,7 +123,7 @@ const App: React.FC = () => {
       <footer className="p-6 text-center text-slate-500 text-sm font-medium">
         <p>Designed & Developed with <span className="text-pink-500">♥</span> by Gemini</p>
       </footer>
-      
+
       <style>{`
         @keyframes blob {
           0% { transform: translate(0px, 0px) scale(1); }

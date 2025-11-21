@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TermData } from '../types';
+import { TermData } from '../../types';
 import { Plus, Check, ArrowRight, Sparkles } from 'lucide-react';
 import ChartDisplay from './ChartDisplay';
 
@@ -33,7 +33,7 @@ const VotingCard: React.FC<VotingCardProps> = ({ term, onVote, onNext, isLast })
     <div className="w-full max-w-2xl mx-auto bg-white/80 backdrop-blur-md border border-white/60 rounded-[2.5rem] p-6 md:p-10 shadow-[0_30px_60px_-12px_rgba(0,0,0,0.1)] relative overflow-hidden transition-all duration-500">
       {/* Decorative background circle inside card */}
       <div className="absolute -top-32 -right-32 w-80 h-80 bg-gradient-to-br from-orange-100 to-pink-100 rounded-full opacity-60 blur-3xl pointer-events-none animate-pulse"></div>
-      
+
       {/* Term Header */}
       <div className="text-center mb-10 relative z-10">
         <span className="inline-block px-4 py-1.5 rounded-full bg-slate-100/80 text-slate-500 text-sm font-bold mb-5 border border-slate-200 backdrop-blur-sm">
@@ -52,7 +52,7 @@ const VotingCard: React.FC<VotingCardProps> = ({ term, onVote, onNext, isLast })
             あなたはどう発音しますか？
             <Sparkles className="w-4 h-4 text-yellow-400" />
           </p>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {term.options.map((option) => (
               <button
@@ -108,11 +108,11 @@ const VotingCard: React.FC<VotingCardProps> = ({ term, onVote, onNext, isLast })
             </div>
             <p className="text-slate-400 text-sm font-medium">みんなの投票結果をチェック</p>
           </div>
-          
+
           <div className="bg-slate-50/80 p-6 rounded-3xl border border-slate-100 shadow-inner mb-8">
             <ChartDisplay options={term.options} totalVotes={term.totalVotes} />
           </div>
-          
+
           <div className="flex justify-center">
             <button
               onClick={onNext}

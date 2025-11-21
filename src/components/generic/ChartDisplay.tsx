@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   Cell
 } from 'recharts';
-import { PronunciationOption } from '../types';
+import { PronunciationOption } from '../../types';
 
 interface ChartDisplayProps {
   options: PronunciationOption[];
@@ -32,8 +32,8 @@ const ChartDisplay: React.FC<ChartDisplayProps> = ({ options, totalVotes }) => {
         <div className="bg-white border border-slate-100 p-4 rounded-xl shadow-xl text-sm z-50">
           <p className="font-bold text-slate-800 text-lg mb-1">{dataPoint.label}</p>
           <div className="flex items-center gap-2">
-             <span className="font-bold text-orange-500 text-xl">{`${dataPoint.percentage}%`}</span>
-             <span className="text-slate-400">{`(${dataPoint.count} 票)`}</span>
+            <span className="font-bold text-orange-500 text-xl">{`${dataPoint.percentage}%`}</span>
+            <span className="text-slate-400">{`(${dataPoint.count} 票)`}</span>
           </div>
         </div>
       );
@@ -59,9 +59,9 @@ const ChartDisplay: React.FC<ChartDisplayProps> = ({ options, totalVotes }) => {
             axisLine={false}
             tickLine={false}
           />
-          <Tooltip 
-            content={<CustomTooltip />} 
-            cursor={{fill: 'rgba(0,0,0,0.03)', radius: 8}} 
+          <Tooltip
+            content={<CustomTooltip />}
+            cursor={{ fill: 'rgba(0,0,0,0.03)', radius: 8 }}
           />
           <Bar dataKey="count" radius={[0, 8, 8, 0]} barSize={32}>
             {data.map((entry, index) => (

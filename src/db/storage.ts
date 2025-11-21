@@ -2,26 +2,34 @@ import { drizzle } from 'drizzle-orm/d1';
 import { eq, sql, desc } from 'drizzle-orm';
 import { terms, options, termsRelations, optionsRelations } from './schema';
 import { TermData } from '../types';
+import { getContext } from 'hono/context-storage';
+
 
 // Helper to access the D1 binding
 const getDB = () => {
   const schema = { terms, options, termsRelations, optionsRelations };
-  // @ts-ignore
-  if (typeof process !== 'undefined' && process.env && process.env.DB) {
-     // @ts-ignore
-     return drizzle(process.env.DB, { schema });
+  
+  try {
+    // Get the Hono context with proper typing
+    const c = getContext();
+    
+    // Check if env exists
+    if (!c.env) {
+      throw new Error('Environment bindings not available. Make sure you are running in a Cloudflare Workers context.');
+    }
+    
+    // @ts-ignore 一旦
+    const db = c.env.DB;
+    
+    if (!db) {
+      throw new Error('D1 Database binding (DB) not found in Cloudflare environment');
+    }
+    
+    return drizzle(db, { schema });
+  } catch (error) {
+    console.error('Failed to get D1 binding:', error);
+    throw new Error('D1 Database binding (DB) not found. Please check your wrangler.jsonc and run with "npm run dev".');
   }
-  // @ts-ignore
-  if (typeof globalThis !== 'undefined' && (globalThis as any).DB) {
-     // @ts-ignore
-     return drizzle((globalThis as any).DB, { schema });
-  }
-  // @ts-ignore
-  if (typeof globalThis !== 'undefined' && (globalThis as any).env && (globalThis as any).env.DB) {
-     // @ts-ignore
-     return drizzle((globalThis as any).env.DB, { schema });
-  }
-  throw new Error('D1 Database binding (DB) not found. Please check your wrangler.toml and environment variables.');
 };
 
 export async function getTerms(): Promise<TermData[]> {

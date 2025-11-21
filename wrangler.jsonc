@@ -1,0 +1,21 @@
+{
+  "name": "dev-prononce",
+  "main": "./dist/server/serve-cloudflare.js",
+  "compatibility_date": "2024-11-11",
+  "compatibility_flags": ["nodejs_als"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist/public",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dev-pronounce",
+      "database_id": "81015bb0-03ec-41ab-9510-c1c023b051aa",
+      "migrations_dir": "drizzle"
+    }
+  ]
+}
+
