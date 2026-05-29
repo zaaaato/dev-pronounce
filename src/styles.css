@@ -1,3 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    /* 温かいクリーム地 + 32px の薄いグリッド。
+       グラデーションブロブ / グラスモーフィズムは廃止。背景は1種類のみ。 */
+    background-color: #fbf3e3;
+    background-image: linear-gradient(#14141410 1px, transparent 1px),
+      linear-gradient(90deg, #14141410 1px, transparent 1px);
+    background-size: 32px 32px;
+    color: #141414;
+    font-family: 'Space Grotesk', 'Noto Sans JP', system-ui, sans-serif;
+  }
+
+  /* 数値（票数・パーセント）は計器のように桁を揃える */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  /* ローディング用の機械的なカーソル点滅（ソフトな pulse ではなく steps でカチッと） */
+  @keyframes caret-blink {
+    0%,
+    49.99% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .caret-blink {
+    animation: caret-blink 1s steps(1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .caret-blink {
+      animation: none;
+    }
+  }
+}
