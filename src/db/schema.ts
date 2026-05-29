@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer, primaryKey } from 'drizzle-orm/sqlite-core';
 import { relations } from 'drizzle-orm';
 
 export const terms = sqliteTable('terms', {
@@ -15,6 +15,21 @@ export const options = sqliteTable('options', {
   count: integer('count').default(0).notNull(),
   isCustom: integer('is_custom', { mode: 'boolean' }).default(false).notNull(),
 });
+
+// 職種(role)/経験年数(exp) などセグメント別の票数。
+// (option_id, dim, bucket) で 1 行。dim='role'|'exp', bucket は各 value。
+export const segmentCounts = sqliteTable(
+  'segment_counts',
+  {
+    optionId: text('option_id').notNull(),
+    dim: text('dim').notNull(),
+    bucket: text('bucket').notNull(),
+    count: integer('count').default(0).notNull(),
+  },
+  (t) => ({
+    pk: primaryKey({ columns: [t.optionId, t.dim, t.bucket] }),
+  }),
+);
 
 export const termsRelations = relations(terms, ({ many }) => ({
   options: many(options),
