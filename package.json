@@ -4,30 +4,37 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "waku dev",
+    "dev:cf": "npm run build && wrangler dev",
     "build": "waku build",
     "start": "waku start",
-    "deploy": "npm run build && wrangler pages deploy dist",
-    "type-check": "tsc --noEmit"
+    "deploy": "npm run build && wrangler deploy",
+    "type-check": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply dev-pronounce --local",
+    "db:migrate:remote": "wrangler d1 migrations apply dev-pronounce --remote",
+    "db:seed:local": "wrangler d1 execute dev-pronounce --local --file=db/seed.sql && wrangler d1 execute dev-pronounce --local --file=db/seed-segments.sql",
+    "db:seed:remote": "wrangler d1 execute dev-pronounce --remote --file=db/seed.sql && wrangler d1 execute dev-pronounce --remote --file=db/seed-segments.sql",
+    "db:setup:local": "npm run db:migrate:local && npm run db:seed:local",
+    "db:reset:local": "rm -rf .wrangler/state/v3/d1 && npm run db:setup:local"
   },
   "dependencies": {
-    "drizzle-orm": "^0.44.7",
-    "lucide-react": "^0.469.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "recharts": "^2.15.0",
-    "waku": "^0.27.1"
+    "drizzle-orm": "^0.45.2",
+    "lucide-react": "^1.17.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "waku": "^0.27.5"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241230.0",
-    "@types/node": "^22.10.5",
-    "@types/react": "^19.0.3",
-    "@types/react-dom": "^19.0.2",
-    "autoprefixer": "^10.4.22",
-    "drizzle-kit": "^0.31.7",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.18",
-    "typescript": "^5.7.3",
-    "wrangler": "^4.50.0"
+    "@cloudflare/workers-types": "^4.20260529.1",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.5.0",
+    "drizzle-kit": "^0.31.10",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.95.0"
   }
 }
