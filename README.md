@@ -102,7 +102,3 @@ dev-pronounce/
 ├── vite.config.ts        # Vite 設定
 └── wrangler.toml         # Cloudflare Workers/Pages 設定
 ```
-
-## 📝 ライセンス
-
-MIT
